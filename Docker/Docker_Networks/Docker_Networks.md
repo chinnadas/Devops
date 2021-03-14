@@ -47,7 +47,7 @@ You can see few networks these are default networks. By default all networks ass
 1. Create 2 containers in the default bridge network 
 ```sh 
   docker run -d -it --name nginxappint01 -p 8081:80 nginx 
-  docker run -d it --name nginxappint02 -p 8082:80 nginx
+  docker run -d -it --name nginxappint02 -p 8082:80 nginx
 ```
 
 2. try to access one container with other it should work 
