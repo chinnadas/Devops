@@ -1,0 +1,83 @@
+https://directdevops.blog/2019/01/05/sonarqube/
+
+
+SonarQube
+Installing SonarQube
+In this document we would install sonarqube as referred over here 
+
+Steps for the installation on ubuntu are add the following line to the file @ /etc/apt/sources.list: deb [trusted=yes] http://downloads.sourceforge.net/project/sonar-pkg/deb  binary/
+
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk
+sudo apt-get install sonar=6.7.4
+sudo service sonar start
+The default user name and password is admin. Now navigate to http://<ipaddress&gt;:9000
+
+Once you login with default credentials
+
+you will be asked to provide a token
+Language which you want todo analysis. In this documentation i had selected java & token name as test
+
+Sonar initial
+Ensure you copy the token as we will be using in the future
+
+Configuring Jenkins and sonar to perform Code Analysis
+Install SonarQube ScannerFor Jenkins Plugin using Plugins Section Refer 
+
+Navigate to Manage Jenkins => Configure System. Scroll down to sonarqube servers and configure the sonarqube installation as shown 
+
+
+Configuring Jenkins pipeline to perform sonar qube analysis in Jenkins pipeline
+Ensure you have Name of server configured in above section.
+
+In the below section i would be configuring the sonarqube analysis on maven based project from jenkins pipeline
+
+SonarQube
+Installing SonarQube
+In this document we would install sonarqube as referred over here 
+
+Steps for the installation on ubuntu are add the following line to the file @ /etc/apt/sources.list: deb [trusted=yes] http://downloads.sourceforge.net/project/sonar-pkg/deb  binary/
+
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk
+sudo apt-get install sonar=6.7.4
+sudo service sonar start
+The default user name and password is admin. Now navigate to http://<ipaddress&gt;:9000
+
+Once you login with default credentials
+
+you will be asked to provide a token
+Language which you want todo analysis. In this documentation i had selected java & token name as test
+
+Sonar initial
+Ensure you copy the token as we will be using in the future
+
+Configuring Jenkins and sonar to perform Code Analysis
+Install SonarQube ScannerFor Jenkins Plugin using Plugins Section Refer 
+
+Navigate to Manage Jenkins => Configure System. Scroll down to sonarqube servers and configure the sonarqube installation as shown 
+
+
+Configuring Jenkins pipeline to perform sonar qube analysis in Jenkins pipeline
+Ensure you have Name of server configured in above section.
+
+In the below section i would be configuring the sonarqube analysis on maven based project from jenkins pipeline
+
+node {
+
+   stage('SCM') {
+	  git 'https://github.com/spring-projects/spring-petclinic.git'
+   }
+   
+   stage ('build the packages') {
+	  sh 'mvn package'
+   }
+   
+   stage('SonarQube analysis') {
+    // performing sonarqube analysis with "withSonarQubeENV(<Name of Server configured in Jenkins>)"
+    withSonarQubeEnv('SONAR-6.7.4') {
+      // requires SonarQube Scanner for Maven 3.2+
+     sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+     }
+   }
+  } 
