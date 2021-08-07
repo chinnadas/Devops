@@ -1,5 +1,5 @@
 Docker swarm:
-	swarm is a group machaines are running in docker and join in to cluster.
+	swarm is a group machaines are running  docker and join in to cluster.
 swarm is atool for container orchestration
 - helth checks on every container
 - ensure all containers are up on every system
