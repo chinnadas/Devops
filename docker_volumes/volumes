@@ -2,11 +2,11 @@ Docker volumes:
 Create volume and mount:
 # docker volume create jenkins
 #docker volume inspect jenkins
-# docker run -d  -p 8080:8080 –-name myjenkins -v jenkins:/var/Jenkins_home Jenkins:2.60.3
+# docker run -d  -p 8080:8080 –-name myjenkins -v jenkins:/var/Jenkins_home jenkins:2.60.3
 
 Create directory with full permission :
 # mkdir backup
-# docker run -d  -p 9090:9090 --name myjenkins2 -v /root/backup:/var/jenkins_home Jenkins:2.60.3
+# docker run -d  -p 9090:9090 --name myjenkins2 -v /root/backup:/var/jenkins_home jenkins:2.60.3
 
 Container volume  to new container:
 # docker run -d --volumes-from myjenkins2 --name myjenkins4 jenkins:latest
